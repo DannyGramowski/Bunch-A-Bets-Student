@@ -12,6 +12,8 @@ We will be using GitHub Classroom for everyone to submit their code. **CODE IS D
 
 You must Venmo $5 per bot by August 13th when code is due. Please send the money to @Daniel-Gramowski on Venmo with a funny message related to the tournament. Non-funny messages will be returned to the sender. The last 4 digits of my phone number are 3207.
 
+The open source code for the server is available on [GitHub](https://github.com/DannyGramowski/Bunch-A-Bets).
+
 ### Required Files
 
 > NOTE: Where specified, filenames must be exact.
