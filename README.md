@@ -1,6 +1,6 @@
 # Tournament Rules
 
-Howdy Partner! Welcome to the **Quick Draw Circuit**. Contestants will submit bots of their own creation to play Texas Hold'em Poker against other submitted bots. This document details the tournament structure, submission instructions, tournament rules, and the API for designing, connecting, and running your bot. The tournament will be held on **Friday, 8/22/25**, and for those who are in Rochester we will host all participants for a party at **115 Westmoreland Drive** (rides provided). If you are unable to be there in person (loser), the event will also be available through a Youtube Live.
+Howdy Partner! Welcome to the **Quick Draw Circuit**. Contestants will submit bots of their own creation to play Texas Hold'em Poker against other submitted bots. This document details the tournament structure, submission instructions, tournament rules, and the API for designing, connecting, and running your bot. The tournament will be held on **Saturday, 2/7/26**, and for those who are in Rochester we will host all participants for a party at **115 Westmoreland Drive** (rides provided). If you are unable to be there in person (loser), the event will also be available through a Youtube Live.
 
 The spirit of this friendly competition is to write your own algorithm for playing poker. We ask that you play to all the rules listed below, and don’t try to find loopholes or ways to get around the stated rules just to make the best bot. Remember to have fun! 
 
@@ -8,9 +8,9 @@ The spirit of this friendly competition is to write your own algorithm for playi
 
 There is a $5 buy in for every bot submission and each player is allowed to submit up to 3 bots.
 
-We will be using GitHub Classroom for everyone to submit their code. **CODE IS DUE BY AUGUST 13th**. If you want to submit multiple bots, they must all be in the same assignment but different folders. We will download and test everyone’s code over the following week. If we find issues with your code, we will reach out and you can submit an updated version. After the tournament, all bots will be open sourced.
+We will be using GitHub Classroom for everyone to submit their code. **CODE IS DUE BY January 31st**. If you want to submit multiple bots, they must all be in the same assignment but different folders. We will download and test everyone’s code over the following week. If we find issues with your code, we will reach out and you can submit an updated version. After the tournament, all bots will be open sourced.
 
-You must Venmo $5 per bot by August 13th when code is due. Please send the money to @Daniel-Gramowski on Venmo with a funny message related to the tournament. Non-funny messages will be returned to the sender. The last 4 digits of my phone number are 3207.
+You must Venmo $5 per bot by Januray 31th when code is due. Please send the money to @Daniel-Gramowski on Venmo with a funny message related to the tournament. Non-funny messages will be returned to the sender. The last 4 digits of my phone number are 3207.
 
 The open source code for the server is available on [GitHub](https://github.com/DannyGramowski/Bunch-A-Bets).
 
@@ -186,14 +186,14 @@ This endpoint returns a JSON response in the following format:
 
 ```json
 {
-"port_number": PORT_NUMBER,
-"bot_id": BOT_ID
+"portNumber": PORT_NUMBER,
+"id": BOT_ID
 }
 ```
 
-`port_number` (int): This exact port number must be used when you connect to the server via a socket. See [Connecting to the Server](#connecting-to-the-server). 
+`portNumber` (int): This exact port number must be used when you connect to the server via a socket. See [Connecting to the Server](#connecting-to-the-server). 
 
-`bot_id` (int): This will be the ID your bot was assigned during tournament registration (internal to the server). This will be the same ID that shows up in Gameplay messages.
+`id` (int): This will be the ID your bot was assigned during tournament registration (internal to the server). This will be the same ID that shows up in Gameplay messages.
 
 
 ## Developing a Bot
@@ -251,7 +251,7 @@ The server will send this message to your bot when it is your turn to play. You 
 {
 "command": "request_action",
 "hand": [CARD, CARD],
-"community_cards": [CARD, ...],
+"center_cards": [CARD, ...],
 "game_number": GAME_NUMBER,
 "hand_number": HAND_NUMBER,
 "round_number": ROUND_NUMBER,
@@ -272,7 +272,7 @@ The server will send this message to your bot when it is your turn to play. You 
 }
 ```
 
-`community_cards` (list[Card]): A list of cards that represents the cards publicly available at the table. This list changes size depending on the round number.
+`center_cards` (list[Card]): A list of cards that represents the cards publicly available at the table. This list changes size depending on the round number.
 
 `game_number` (int): The index of the game within the tournament
 
@@ -287,7 +287,7 @@ The server will send this message to your bot when it is your turn to play. You 
     "id": BOT_ID, // this is the server’s id for the bot, guaranteed to be unique
 "name": BOT_NAME, // this is the bot’s chosen name
 "hand": [CARD, CARD] | [], // this is the bot’s hand. Only your player’s is revealed before the showdown
-"State": ROUND_STATE, // this is the current state of the bot. Folded // if they haven’t acted this round, otherwise it is the action they // did. "not_played" | "folded" | "called" | "raised" | "all_in"
+"state": ROUND_STATE, // this is the current state of the bot. Folded // if they haven’t acted this round, otherwise it is the action they // did. "not_played" | "folded" | "called" | "raised" | "all_in"
 "round_bet": POT_VALUE, // this is the number of the chips the bot has bet so far this round
 "hand_bet": TOTAL_BET, // the total amount this bot has bet in the current hand
 "bank": BANK // the total number of chips the bot has remaining
@@ -338,7 +338,8 @@ The server will send this message to your bot during the showdown of each hand, 
 "game_number": GAME_NUMBER,
 "hand_number": HAND_NUMBER,
 "players": [PLAYER, ...],
-"pots": [POT, ...]
+"pots": [POT, ...],
+"center_cards", [CARD, ...]
 }
 ```
 
